@@ -261,7 +261,7 @@ update_game <- function(event, frame_num, ...) {
     }
     
     # Show Score
-    nr_text(board_nr, str = paste0("SCORE: ", game$score), x = 2 * 8, y = 31 * 8, color = 'white', fontsize = 16)
+    nr_text_basic(board_nr, str = paste0("SCORE: ", game$score), x = 2 * 8, y = 31 * 8, color = 'white', fontsize = 16)
     
     if (game$over) {
       if (game$complete) {
