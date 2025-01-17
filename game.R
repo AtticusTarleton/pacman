@@ -233,15 +233,15 @@ update_game <- function(event, frame_num, ...) {
     nr_copy_into(board_nr, blank_board_nr)
 
     # Blit current dots into board
-    nr_blit(board_nr, (game$dots$x - 0.5) * 8, (game$dots$y - 0.5) * 8, dot_nr)
+    nr_blit(dst = board_nr, x = (game$dots$x - 0.5) * 8, y = (game$dots$y - 0.5) * 8, src = dot_nr)
 
     # Blit ghosts into board
     for (i in seq_along(game$gh)) {
       nr_blit(
-        board_nr,
+        dst = board_nr,
         x = game$gh[[i]]$col * 8 - 11 + step * game$gh[[i]]$dx,
         y = game$gh[[i]]$row * 8 - 11 + step * game$gh[[i]]$dy,
-        ghost[[i]][[game$gh[[i]]$dir]][[ bitwShiftR(step, 1L) %% 2 + 1L]]
+        src = ghost[[i]][[game$gh[[i]]$dir]][[ bitwShiftR(step, 1L) %% 2 + 1L]]
       )
     }
 
@@ -256,20 +256,20 @@ update_game <- function(event, frame_num, ...) {
       
       # Show Lives remaining
       for (i in seq(game$lives)) {
-        nr_blit(board_nr, x = (26 - 2*i) * 8, y = 31 * 8, pacman$right[[2]])
+        nr_blit(dst = board_nr, x = (26 - 2*i) * 8, y = 31 * 8, src = pacman$right[[2]])
       }
     }
     
     # Show Score
-    nr_text(board_nr, paste0("SCORE: ", game$score), x = 2 * 8, y = 31 * 8, 'white', fontsize = 16)
+    nr_text(board_nr, str = paste0("SCORE: ", game$score), x = 2 * 8, y = 31 * 8, color = 'white', fontsize = 16)
     
     if (game$over) {
       if (game$complete) {
-        nr_text(board_nr, "YOU ", x = 12 * 8, y = 16.5 * 8, 'white', fontsize = 16)
-        nr_text(board_nr, "WON!", x = 12 * 8, y = 14.5 * 8, 'white', fontsize = 16)
+        nr_text(board_nr, str = "YOU ", x = 12 * 8, y = 16.5 * 8, color = 'white', fontsize = 16)
+        nr_text(board_nr, str = "WON!", x = 12 * 8, y = 14.5 * 8, color = 'white', fontsize = 16)
       } else {
-        nr_text(board_nr, "GAME", x = 12 * 8, y = 16.5 * 8, 'white', fontsize = 16)
-        nr_text(board_nr, "OVER", x = 12 * 8, y = 14.5 * 8, 'white', fontsize = 16)
+        nr_text(board_nr, str = "GAME", x = 12 * 8, y = 16.5 * 8, color = 'white', fontsize = 16)
+        nr_text(board_nr, str = "OVER", x = 12 * 8, y = 14.5 * 8, color = 'white', fontsize = 16)
       }
     }
     
