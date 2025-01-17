@@ -120,17 +120,17 @@ s <- lapply(s, nara::array_to_nr)
 # Create a montage of the maze pieces
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 nr <- nr_new(3*8 + 3, 3*8 + 3, fill = 'white')
-nr_blit(nr, 1 + 0 * 8 + 0, 1 + 2 * 8 + 2, s[[1]])
-nr_blit(nr, 1 + 1 * 8 + 1, 1 + 2 * 8 + 2, s[[2]])
-nr_blit(nr, 1 + 2 * 8 + 2, 1 + 2 * 8 + 2, s[[3]])
+nr_blit(dst = nr, x = 1 + 0 * 8 + 0, y = 1 + 2 * 8 + 2, src = s[[1]])
+nr_blit(dst = nr, x = 1 + 1 * 8 + 1, y = 1 + 2 * 8 + 2, src = s[[2]])
+nr_blit(dst = nr, x = 1 + 2 * 8 + 2, y = 1 + 2 * 8 + 2, src = s[[3]])
 
-nr_blit(nr, 1 + 0 * 8 + 0, 1 + 1 * 8 + 1, s[[4]])
-nr_blit(nr, 1 + 1 * 8 + 1, 1 + 1 * 8 + 1, s[[5]])
-nr_blit(nr, 1 + 2 * 8 + 2, 1 + 1 * 8 + 1, s[[6]])
+nr_blit(dst = nr, x = 1 + 0 * 8 + 0, y = 1 + 1 * 8 + 1, src = s[[4]])
+nr_blit(dst = nr, x = 1 + 1 * 8 + 1, y = 1 + 1 * 8 + 1, src = s[[5]])
+nr_blit(dst = nr, x = 1 + 2 * 8 + 2, y = 1 + 1 * 8 + 1, src = s[[6]])
 
-nr_blit(nr, 1 + 0 * 8 + 0, 1 + 0 * 8 + 0, s[[7]])
-nr_blit(nr, 1 + 1 * 8 + 1, 1 + 0 * 8 + 0, s[[8]])
-nr_blit(nr, 1 + 2 * 8 + 2, 1 + 0 * 8 + 0, s[[9]])
+nr_blit(dst = nr, x = 1 + 0 * 8 + 0, y = 1 + 0 * 8 + 0, src = s[[7]])
+nr_blit(dst = nr, x = 1 + 1 * 8 + 1, y = 1 + 0 * 8 + 0, src = s[[8]])
+nr_blit(dst = nr, x = 1 + 2 * 8 + 2, y = 1 + 0 * 8 + 0, src = s[[9]])
 
 if (FALSE) {
   grid.newpage()
@@ -153,7 +153,7 @@ for (row in 1:31) {
     val <- board[31 + 1 - row, col]
     if (val != '.') {
       idx <- as.integer(val)
-      nr_blit(blank_board_nr, (col - 1) * 8 + 1, (row - 1) * 8 + 1, s[[idx]])
+      nr_blit(dst = blank_board_nr, x = (col - 1) * 8 + 1, y = (row - 1) * 8 + 1, src = s[[idx]])
     }
   }
 }
@@ -186,7 +186,7 @@ dot_nr  <- nara::raster_to_nr(dot_mat)
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 if (FALSE) {
   nr <- nr_duplicate(blank_board_nr)  
-  nr_blit(nr, (dots$x - 0.5) * 8, (dots$y - 0.5) * 8, dot_nr)
+  nr_blit(dst = nr, x = (dots$x - 0.5) * 8, y = (dots$y - 0.5) * 8, src = dot_nr)
   dev.hold()
   grid.newpage()
   grid.raster(nr, interpolate = FALSE); 
@@ -233,7 +233,7 @@ mode(junction)   <- 'integer'
 if (FALSE) {
   coords <- arrayInd(which(junction == 1), dim(junction))
   junction_nr <- nr_duplicate(blank_board_nr)
-  nr_rect(junction_nr, coords[,2]*8 - 3, (32 - coords[,1])*8 - 3, 2, 2, 'white')
+  nr_rect(junction_nr, x = coords[,2]*8 - 3, y = (32 - coords[,1])*8 - 3, w = 2, h = 2, color = 'white')
   grid.raster(junction_nr, interpolate = FALSE)
 }
 
