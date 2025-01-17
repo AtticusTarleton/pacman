@@ -265,11 +265,11 @@ update_game <- function(event, frame_num, ...) {
     
     if (game$over) {
       if (game$complete) {
-        nr_text(board_nr, str = "YOU ", x = 12 * 8, y = 16.5 * 8, color = 'white', fontsize = 16)
-        nr_text(board_nr, str = "WON!", x = 12 * 8, y = 14.5 * 8, color = 'white', fontsize = 16)
+        nr_text_basic(board_nr, str = "YOU ", x = 12 * 8, y = 16.5 * 8, color = 'white', fontsize = 16)
+        nr_text_basic(board_nr, str = "WON!", x = 12 * 8, y = 14.5 * 8, color = 'white', fontsize = 16)
       } else {
-        nr_text(board_nr, str = "GAME", x = 12 * 8, y = 16.5 * 8, color = 'white', fontsize = 16)
-        nr_text(board_nr, str = "OVER", x = 12 * 8, y = 14.5 * 8, color = 'white', fontsize = 16)
+        nr_text_basic(board_nr, str = "GAME", x = 12 * 8, y = 16.5 * 8, color = 'white', fontsize = 16)
+        nr_text_basic(board_nr, str = "OVER", x = 12 * 8, y = 14.5 * 8, color = 'white', fontsize = 16)
       }
     }
     
